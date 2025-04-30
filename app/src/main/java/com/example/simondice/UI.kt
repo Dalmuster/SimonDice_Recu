@@ -1,6 +1,7 @@
 package com.example.simondice
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -28,3 +30,40 @@ fun botonJuego(color:Color) {
         ) {
         }
     }
+
+@Composable
+fun botonStart() {
+    Button(
+        onClick = { },
+        modifier = Modifier
+            .size(150.dp)
+            .padding(20.dp),
+        shape = RectangleShape,
+
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.White
+        )
+    ) {
+        Text(
+            text = "Start",
+            color = Color.Black
+        )
+    }
+}
+
+@Composable
+fun Puntuacion() {
+        Text(
+            text = "Puntuación",
+            color = Color.Black
+        )
+        Text(
+            text = "$puntuacion",
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    color = Color.Black
+                )
+
+        )
+}
