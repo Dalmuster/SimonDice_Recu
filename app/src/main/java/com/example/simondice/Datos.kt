@@ -1,3 +1,10 @@
 package com.example.simondice
 
-var puntuacion = 0
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
+class Datos {
+    val puntuacion = mutableStateOf(0)
+}

@@ -1,5 +1,6 @@
 package com.example.simondice
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -17,10 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 
+val modelView = ModelView()
+val datos = Datos()
+
 @Composable
 fun botonJuego(color:Color) {
         Button(
-            onClick = { },
+            onClick = {
+            },
             modifier = Modifier
                 .size(200.dp)
                 .padding(20.dp),
@@ -36,7 +41,9 @@ fun botonJuego(color:Color) {
 @Composable
 fun botonStart() {
     Button(
-        onClick = { },
+        onClick = {
+            datos.puntuacion.value = modelView.sumarPuntuación()
+        },
         modifier = Modifier
             .size(150.dp)
             .padding(20.dp),
@@ -61,7 +68,7 @@ fun Puntuacion() {
             color = Color.Black
         )
         Text(
-            text = "$puntuacion",
+            text = "${datos.puntuacion.value}",
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .border(
