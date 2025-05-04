@@ -2,6 +2,7 @@ package com.example.simondice
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -9,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -53,6 +55,7 @@ fun botonStart() {
 
 @Composable
 fun Puntuacion() {
+    Column {
         Text(
             text = "Puntuación",
             color = Color.Black
@@ -60,10 +63,13 @@ fun Puntuacion() {
         Text(
             text = "$puntuacion",
             modifier = Modifier
+                .align(Alignment.CenterHorizontally)
                 .border(
                     width = 2.dp,
                     color = Color.Black
                 )
+                .padding(horizontal = 20.dp)
 
         )
+    }
 }
