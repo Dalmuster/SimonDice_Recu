@@ -1,10 +1,13 @@
 package com.example.simondice
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+
+var secuencia = mutableStateListOf<Int>()
+val secuenciaJugador = mutableStateListOf<Int>()
 
 class Datos {
-    val puntuacion = mutableStateOf(0)
+    var puntuacion = mutableStateOf(0)
+    val ronda = mutableStateOf(0)
+
 }
