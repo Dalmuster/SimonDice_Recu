@@ -11,22 +11,54 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 val modelView = ModelView()
 val datos = Datos()
 
 @Composable
 fun botonJuego(color:Color) {
+    var colorR = remember { mutableStateOf(color) }
+
+
+    LaunchedEffect(estadoJuego.value) {
+    if (estadoJuego.value== EstadoJuego.MOSTRANDO_SECUENCIA){
+        for (colorId in secuencia) {
+            if(color==Color.Green&&colorId==1){
+                colorR.value=Color(255, 102, 102)
+                delay(1000)
+            }
+            if(color==Color.Red&&colorId==2){
+                colorR.value=Color(255, 102, 102)
+                delay(1000)
+            }
+            if(color==Color.Yellow&&colorId==3){
+                colorR.value=Color(255, 102, 102)
+                delay(1000)
+            }
+            if(color==Color.Blue&&colorId==4){
+                colorR.value=Color(255, 102, 102)
+                delay(1000)
+            }
+        }
+        colorR.value=color
+    }
+    }
         Button(
             onClick = {
 
 
+                if (estadoJuego.value==EstadoJuego.TURNO_JUGADOR){
                 if (color==Color.Green){
                     secuenciaJugador.add(1)
                 }
@@ -44,17 +76,19 @@ fun botonJuego(color:Color) {
                 if(modelView.compararParcial()==true){
                     if(secuencia.size==secuenciaJugador.size){
                         if(modelView.compararExacto()){
-                            Log.d("hola","puntuacion: ${modelView.puntuacion}")
                             modelView.sumarPuntuación()
+                            secuencia.add(modelView.numeroRandom())
+                            Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
+                        } else {
                             secuencia.add(modelView.numeroRandom())
                             Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
                         }
                     }
-
-
-
+                }else {
+                    secuencia.add(modelView.numeroRandom())
+                    Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
                 }
-
+            }
             },
             modifier = Modifier
                 .size(200.dp)
@@ -62,7 +96,7 @@ fun botonJuego(color:Color) {
             shape = CircleShape,
 
             colors = ButtonDefaults.buttonColors(
-                containerColor = color
+                containerColor = colorR.value
             )
         ) {
         }
@@ -72,9 +106,13 @@ fun botonJuego(color:Color) {
 fun botonStart() {
     Button(
         onClick = {
+            if(estadoJuego.value== EstadoJuego.ESPERANDO_INICIO){
             secuencia.add(modelView.numeroRandom())
             Log.d("hola"," ${secuencia.joinToString(", ")}")
             Log.d("hola"," ${secuenciaJugador.joinToString(", ")}")
+            estadoJuego.value = EstadoJuego.MOSTRANDO_SECUENCIA
+                Log.d("hola"," ${estadoJuego.value}")
+            }
         },
         modifier = Modifier
             .size(150.dp)

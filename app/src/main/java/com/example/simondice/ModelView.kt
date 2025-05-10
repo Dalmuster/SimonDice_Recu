@@ -8,6 +8,8 @@ import kotlin.random.Random
 class ModelView {
     var puntuacion by mutableStateOf(0)
 
+
+
     fun sumarPuntuación(): Int {
         datos.puntuacion.value +=1
         return puntuacion
@@ -42,8 +44,11 @@ class ModelView {
         return true
     }
 
+
     fun numeroRandom (): Int {
         val numero = Random.nextInt(1, 5)
         return numero
     }
+
+
 }
