@@ -9,8 +9,6 @@ val secuenciaJugador = mutableStateListOf<Int>()
 
 var estadoJuego = mutableStateOf(EstadoJuego.ESPERANDO_INICIO)
 
-var parpadeoR = Color(255, 102, 102)
-
 class Datos {
     var puntuacion = mutableStateOf(0)
 

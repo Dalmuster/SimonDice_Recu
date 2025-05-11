@@ -34,25 +34,35 @@ fun botonJuego(color:Color) {
     LaunchedEffect(estadoJuego.value) {
     if (estadoJuego.value== EstadoJuego.MOSTRANDO_SECUENCIA){
         for (colorId in secuencia) {
+            delay(1500)
             if(color==Color.Green&&colorId==1){
-                colorR.value=Color(255, 102, 102)
-                delay(1000)
+                colorR.value=Color(23, 147, 0, 255)
+                delay(500)
+                colorR.value=color
             }
             if(color==Color.Red&&colorId==2){
-                colorR.value=Color(255, 102, 102)
-                delay(1000)
+                colorR.value=Color(162, 0, 0, 255)
+                delay(500)
+                colorR.value=color
             }
             if(color==Color.Yellow&&colorId==3){
-                colorR.value=Color(255, 102, 102)
-                delay(1000)
+                colorR.value=Color(255, 224, 63, 255)
+                delay(500)
+                colorR.value=color
             }
             if(color==Color.Blue&&colorId==4){
-                colorR.value=Color(255, 102, 102)
-                delay(1000)
+                colorR.value=Color(46, 236, 255, 255)
+                delay(500)
+                colorR.value=color
             }
         }
         colorR.value=color
+        delay(1000)
+        estadoJuego.value= EstadoJuego.TURNO_JUGADOR
     }
+
+
+
     }
         Button(
             onClick = {
@@ -78,14 +88,17 @@ fun botonJuego(color:Color) {
                         if(modelView.compararExacto()){
                             modelView.sumarPuntuación()
                             secuencia.add(modelView.numeroRandom())
+                            estadoJuego.value = EstadoJuego.MOSTRANDO_SECUENCIA
                             Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
                         } else {
-                            secuencia.add(modelView.numeroRandom())
+
+                            estadoJuego.value= EstadoJuego.ESPERANDO_INICIO
                             Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
                         }
                     }
                 }else {
-                    secuencia.add(modelView.numeroRandom())
+
+                    estadoJuego.value= EstadoJuego.ESPERANDO_INICIO
                     Log.d("hola","secuencia: ${secuencia.joinToString(", ")}")
                 }
             }
@@ -106,6 +119,7 @@ fun botonJuego(color:Color) {
 fun botonStart() {
     Button(
         onClick = {
+            Log.d("hola"," ${estadoJuego.value}")
             if(estadoJuego.value== EstadoJuego.ESPERANDO_INICIO){
             secuencia.add(modelView.numeroRandom())
             Log.d("hola"," ${secuencia.joinToString(", ")}")
